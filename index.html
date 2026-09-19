@@ -1,0 +1,2026 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NeoNew_01 — Discord Community</title>
+
+<style>
+:root{
+  --bg:#08050f;
+  --panel:#120b1d;
+  --panel2:#190e29;
+  --purple:#9b5cff;
+  --purple2:#6d28d9;
+  --text:#f6f0ff;
+  --muted:#aa9dbb;
+  --line:#2d1a42;
+  --gold:#ffd35a;
+  --green:#58e6a5;
+  --red:#ff647c;
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 20% 0%,rgba(155,92,255,.18),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(109,40,217,.14),transparent 30%),
+    var(--bg);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(155,92,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(155,92,255,.025) 1px,transparent 1px);
+  background-size:50px 50px;
+  mask-image:linear-gradient(to bottom,black,transparent 80%);
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.container{
+  width:min(1180px,calc(100% - 32px));
+  margin:auto;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  backdrop-filter:blur(16px);
+  background:rgba(8,5,15,.72);
+  border-bottom:1px solid rgba(155,92,255,.14);
+}
+
+.nav{
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:900;
+  letter-spacing:.5px;
+}
+
+.logo span{
+  color:var(--purple);
+  text-shadow:0 0 25px rgba(155,92,255,.8);
+}
+
+nav{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+nav a,
+.nav-btn{
+  border:0;
+  color:var(--muted);
+  background:transparent;
+  padding:9px 12px;
+  border-radius:10px;
+  transition:.2s;
+}
+
+nav a:hover,
+.nav-btn:hover{
+  color:white;
+  background:rgba(155,92,255,.1);
+}
+
+.hero{
+  min-height:650px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  position:relative;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:850px;
+  padding:90px 0;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 13px;
+  border:1px solid rgba(155,92,255,.35);
+  border-radius:999px;
+  color:#d9c7ff;
+  background:rgba(155,92,255,.07);
+  box-shadow:0 0 30px rgba(155,92,255,.08);
+}
+
+.hero h1{
+  font-size:clamp(46px,8vw,92px);
+  line-height:.95;
+  margin:22px 0;
+  letter-spacing:-4px;
+}
+
+.gradient{
+  background:linear-gradient(100deg,#fff,#cdaaff,#8c4cff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.7;
+  max-width:700px;
+  margin:0 auto 30px;
+}
+
+.actions{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  border:1px solid var(--line);
+  color:white;
+  background:linear-gradient(135deg,#241139,#160a25);
+  padding:12px 18px;
+  border-radius:12px;
+  transition:.25s;
+  box-shadow:0 0 0 rgba(155,92,255,0);
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:rgba(155,92,255,.7);
+  box-shadow:0 10px 35px rgba(109,40,217,.22);
+}
+
+.btn.primary{
+  background:linear-gradient(135deg,#a65cff,#6523d6);
+  border-color:#a65cff;
+}
+
+.btn.danger{
+  background:rgba(255,100,124,.1);
+  border-color:rgba(255,100,124,.35);
+}
+
+.btn.success{
+  background:rgba(88,230,165,.1);
+  border-color:rgba(88,230,165,.35);
+}
+
+section{
+  padding:85px 0;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title h2{
+  margin:0 0 10px;
+  font-size:36px;
+}
+
+.section-title p{
+  color:var(--muted);
+  margin:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.card{
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.025),transparent),
+    var(--panel);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 20px 70px rgba(0,0,0,.22);
+}
+
+.card h3{
+  margin-top:0;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.65;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  background:rgba(155,92,255,.12);
+  border:1px solid rgba(155,92,255,.22);
+  margin-bottom:16px;
+}
+
+.staff-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.staff{
+  text-align:center;
+}
+
+.avatar{
+  width:92px;
+  height:92px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#21132e;
+  border:2px solid rgba(155,92,255,.4);
+  margin-bottom:13px;
+}
+
+.admin-frame{
+  padding:5px;
+  border-radius:50%;
+  display:inline-flex;
+  background:linear-gradient(135deg,#fff0a0,#ffd23e,#ff9e00,#fff0a0);
+  box-shadow:
+    0 0 10px rgba(255,211,90,.9),
+    0 0 30px rgba(255,180,0,.6);
+  animation:goldPulse 2s ease-in-out infinite;
+}
+
+@keyframes goldPulse{
+  0%,100%{
+    filter:brightness(1);
+    box-shadow:0 0 10px rgba(255,211,90,.8),0 0 25px rgba(255,180,0,.45);
+  }
+  50%{
+    filter:brightness(1.25);
+    box-shadow:0 0 18px rgba(255,238,150,1),0 0 45px rgba(255,180,0,.75);
+  }
+}
+
+.role{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  background:rgba(155,92,255,.1);
+  color:#d9c7ff;
+  margin-top:7px;
+}
+
+.role.admin{
+  color:#ffe99a;
+  background:rgba(255,211,90,.1);
+  border:1px solid rgba(255,211,90,.25);
+}
+
+.event-wrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.event{
+  position:relative;
+  overflow:hidden;
+}
+
+.event:before{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  right:-100px;
+  top:-120px;
+  border-radius:50%;
+  background:rgba(155,92,255,.15);
+  filter:blur(20px);
+}
+
+.event h3{
+  font-size:24px;
+  margin-bottom:8px;
+}
+
+.prize{
+  font-size:20px;
+  color:#e5ccff;
+  font-weight:800;
+  margin:15px 0;
+}
+
+.countdown{
+  display:flex;
+  gap:8px;
+  margin:18px 0;
+  flex-wrap:wrap;
+}
+
+.time{
+  min-width:72px;
+  padding:10px;
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#0e0817;
+}
+
+.time strong{
+  display:block;
+  font-size:20px;
+}
+
+.time small{
+  color:var(--muted);
+}
+
+.empty{
+  text-align:center;
+  padding:35px;
+  color:var(--muted);
+  border:1px dashed var(--line);
+  border-radius:16px;
+}
+
+.profile-box{
+  display:grid;
+  grid-template-columns:170px 1fr;
+  gap:25px;
+  align-items:start;
+}
+
+.profile-side{
+  text-align:center;
+}
+
+.profile-side .avatar{
+  width:130px;
+  height:130px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+label{
+  color:#d9cbe7;
+  font-size:13px;
+}
+
+input,textarea,select{
+  width:100%;
+  color:white;
+  background:#0b0711;
+  border:1px solid #352045;
+  border-radius:11px;
+  padding:12px;
+  outline:none;
+  transition:.2s;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(155,92,255,.08);
+}
+
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(8px);
+}
+
+.modal.open{
+  display:flex;
+}
+
+.modal-box{
+  width:min(520px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:#10091a;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.close{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  font-size:25px;
+}
+
+.tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.tab{
+  flex:1;
+  border:1px solid var(--line);
+  background:#0b0711;
+  color:var(--muted);
+  padding:10px;
+  border-radius:10px;
+}
+
+.tab.active{
+  color:white;
+  border-color:var(--purple);
+  background:rgba(155,92,255,.1);
+}
+
+.admin-panel{
+  display:none;
+}
+
+.admin-panel.visible{
+  display:block;
+}
+
+.admin-event{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:16px;
+  margin-bottom:10px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#0d0715;
+}
+
+.admin-event-info{
+  min-width:0;
+}
+
+.admin-event-info strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.admin-event-info span{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.admin-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  justify-content:flex-end;
+}
+
+.admin-actions .btn{
+  padding:8px 11px;
+  font-size:13px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.status.online{
+  color:#8dffc8;
+  background:rgba(88,230,165,.08);
+  border:1px solid rgba(88,230,165,.2);
+}
+
+.status.offline{
+  color:#ff9dad;
+  background:rgba(255,100,124,.08);
+  border:1px solid rgba(255,100,124,.2);
+}
+
+.toast{
+  position:fixed;
+  z-index:200;
+  right:20px;
+  bottom:20px;
+  max-width:360px;
+  padding:13px 17px;
+  border:1px solid rgba(155,92,255,.35);
+  border-radius:13px;
+  background:rgba(18,11,29,.95);
+  box-shadow:0 15px 50px rgba(0,0,0,.45);
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast.error{
+  border-color:rgba(255,100,124,.45);
+}
+
+.particles{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.particle{
+  position:absolute;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background:#b985ff;
+  box-shadow:0 0 12px #9b5cff;
+  animation:float linear infinite;
+}
+
+@keyframes float{
+  from{
+    transform:translateY(110vh) translateX(0);
+  }
+  to{
+    transform:translateY(-20vh) translateX(80px);
+  }
+}
+
+footer{
+  padding:45px 0;
+  border-top:1px solid rgba(155,92,255,.12);
+  color:var(--muted);
+  text-align:center;
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .staff-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .event-wrap{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+  nav{
+    display:none;
+  }
+
+  .hero h1{
+    letter-spacing:-2px;
+  }
+
+  .grid,
+  .staff-grid,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .profile-box{
+    grid-template-columns:1fr;
+  }
+
+  .admin-event{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .admin-actions{
+    justify-content:flex-start;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="#home" class="logo">Neo<span>New_01</span></a>
+
+    <nav>
+      <a href="#about">О нас</a>
+      <a href="#staff">Персонал</a>
+      <a href="#events">Ивенты</a>
+      <a href="#atmosphere">Атмосфера</a>
+      <a href="#profile" id="profileNav" class="hidden">Профиль</a>
+      <button class="nav-btn" id="authNav" onclick="openAuth()">Войти</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="badge">✦ Discord Community</div>
+
+    <h1>
+      Добро пожаловать в
+      <span class="gradient">NeoNew_01</span>
+    </h1>
+
+    <p>
+      Место, где можно найти команду для игры, новых друзей,
+      общение и просто хорошую атмосферу.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="#events">🎁 Ивенты и розыгрыши</a>
+      <a class="btn" href="#about">Узнать больше</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-title">
+      <h2>О нас</h2>
+      <p>NeoNew_01 — это больше, чем просто Discord-сервер.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🎮</div>
+        <h3>Найди команду</h3>
+        <p>
+          Ищи игроков для любимых игр, собирай постоянную команду
+          и проводи время вместе.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Новые друзья</h3>
+        <p>
+          Общайся, знакомься и находи людей с похожими интересами.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💜</div>
+        <h3>Своя атмосфера</h3>
+        <p>
+          Уютное сообщество с событиями, розыгрышами и активным общением.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="staff">
+  <div class="container">
+    <div class="section-title">
+      <h2>Персонал</h2>
+      <p>Люди, которые помогают NeoNew_01 развиваться.</p>
+    </div>
+
+    <div id="staffList" class="staff-grid">
+      <div class="empty">Загрузка персонала...</div>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="container">
+    <div class="section-title">
+      <h2>Ивенты и Розыгрыши</h2>
+      <p>Актуальные события сообщества.</p>
+    </div>
+
+    <div id="eventsList" class="event-wrap">
+      <div class="empty">Загрузка ивентов...</div>
+    </div>
+  </div>
+</section>
+
+<section id="atmosphere">
+  <div class="container">
+    <div class="section-title">
+      <h2>Атмосфера</h2>
+      <p>Готов стать частью NeoNew_01?</p>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <div class="icon" style="margin:0 auto 16px">💜</div>
+
+      <h3>Твоё место уже ждёт тебя</h3>
+
+      <p>
+        Заходи на Discord-сервер, знакомься с участниками,
+        участвуй в событиях и становись частью сообщества.
+      </p>
+
+      <div class="actions">
+        <a
+          class="btn primary"
+          href="https://discord.com/"
+          target="_blank"
+          rel="noopener"
+        >
+          Перейти в Discord
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="profile" class="hidden">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Мой профиль</h2>
+      <p>Управление информацией аккаунта.</p>
+    </div>
+
+    <div class="card profile-box">
+
+      <div class="profile-side">
+        <div id="profileAvatarFrame"></div>
+        <h3 id="profileName">—</h3>
+        <div id="profileRole"></div>
+        <button class="btn danger" style="margin-top:15px" onclick="logout()">
+          Выйти
+        </button>
+      </div>
+
+      <div>
+        <form id="profileForm" onsubmit="saveProfile(event)">
+          <div class="form-grid">
+
+            <div class="field">
+              <label>Логин</label>
+              <input id="pUsername" disabled>
+            </div>
+
+            <div class="field">
+              <label>Никнейм</label>
+              <input id="pNickname" maxlength="80">
+            </div>
+
+            <div class="field full">
+              <label>URL аватарки</label>
+              <input
+                id="pAvatar"
+                placeholder="https://..."
+              >
+            </div>
+
+            <div class="field">
+              <label>Игра</label>
+              <input id="pGame" maxlength="100">
+            </div>
+
+            <div class="field">
+              <label>Discord username</label>
+              <input id="pDiscord" maxlength="100">
+            </div>
+
+            <div class="field">
+              <label>Telegram username</label>
+              <input id="pTelegram" maxlength="100">
+            </div>
+
+            <div class="field full">
+              <label>О себе</label>
+              <textarea id="pBio" maxlength="1000"></textarea>
+            </div>
+
+          </div>
+
+          <button class="btn primary" style="margin-top:15px">
+            Сохранить профиль
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="admin" class="admin-panel">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Админ-панель</h2>
+      <p>Управление участниками и ивентами.</p>
+    </div>
+
+    <div class="card">
+
+      <div class="status online">
+        ● Вы вошли как администратор
+      </div>
+
+      <h3>Создать ивент</h3>
+
+      <form id="eventForm" onsubmit="createEvent(event)">
+        <div class="form-grid">
+
+          <div class="field">
+            <label>Название</label>
+            <input id="eTitle" required maxlength="150">
+          </div>
+
+          <div class="field">
+            <label>Приз</label>
+            <input id="ePrize" required maxlength="150">
+          </div>
+
+          <div class="field">
+            <label>Дата окончания</label>
+            <input id="eEnds" type="datetime-local" required>
+          </div>
+
+          <div class="field">
+            <label>Discord message URL</label>
+            <input
+              id="eDiscord"
+              type="url"
+              placeholder="https://discord.com/channels/..."
+              required
+            >
+          </div>
+
+          <div class="field full">
+            <label>Описание</label>
+            <textarea id="eDescription"></textarea>
+          </div>
+
+        </div>
+
+        <button class="btn primary" style="margin-top:15px">
+          Создать ивент
+        </button>
+      </form>
+
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap">
+        <h3 style="margin:0">Управление ивентами</h3>
+
+        <button class="btn" onclick="loadAdminEvents()">
+          ↻ Обновить
+        </button>
+      </div>
+
+      <div id="adminEvents" style="margin-top:18px">
+        <div class="empty">Загрузка...</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    NeoNew_01 © <span id="year"></span>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="authModal">
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2 style="margin:0">NeoNew_01</h2>
+      <button class="close" onclick="closeAuth()">×</button>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" id="loginTab" onclick="switchAuth('login')">
+        Вход
+      </button>
+
+      <button class="tab" id="registerTab" onclick="switchAuth('register')">
+        Регистрация
+      </button>
+    </div>
+
+    <form id="authForm" onsubmit="submitAuth(event)">
+
+      <div class="field">
+        <label>Логин</label>
+        <input id="authUsername" required minlength="3" maxlength="40">
+      </div>
+
+      <div class="field" style="margin-top:12px">
+        <label>Пароль</label>
+        <input
+          id="authPassword"
+          type="password"
+          required
+          minlength="6"
+          maxlength="100"
+        >
+      </div>
+
+      <div id="registerNickname" class="field" style="margin-top:12px;display:none">
+        <label>Никнейм</label>
+        <input id="authNickname" maxlength="80">
+      </div>
+
+      <button
+        id="authSubmit"
+        class="btn primary"
+        style="width:100%;margin-top:18px"
+      >
+        Войти
+      </button>
+
+    </form>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   SUPABASE CONFIG
+========================================================= */
+
+const SUPABASE_URL="https://nsxotzhuhygkhrelksar.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_T34QnOaBWUO2GBzjxJD-Ng_D-wLHSE-";
+
+if(!SUPABASE_PUBLISHABLE_KEY.startsWith("sb_publishable_")){
+  console.warn("Проверьте Supabase publishable key.");
+}
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let currentUser=null;
+let authMode="login";
+let countdownTimer=null;
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function toast(message,error=false){
+  const el=document.getElementById("toast");
+
+  el.textContent=message;
+  el.className="toast show"+(error?" error":"");
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer=setTimeout(()=>{
+    el.className="toast";
+  },3500);
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function formatDate(date){
+  return new Date(date).toLocaleString("ru-RU",{
+    dateStyle:"medium",
+    timeStyle:"short"
+  });
+}
+
+function toLocalDateTimeValue(date){
+  const d=new Date(date);
+
+  const pad=n=>String(n).padStart(2,"0");
+
+  return d.getFullYear()+"-"+
+    pad(d.getMonth()+1)+"-"+
+    pad(d.getDate())+"T"+
+    pad(d.getHours())+":"+
+    pad(d.getMinutes());
+}
+
+/* =========================================================
+   SUPABASE REST
+========================================================= */
+
+async function api(path,opts={}){
+  const response=await fetch(
+    SUPABASE_URL+"/rest/v1/"+path,
+    {
+      ...opts,
+      headers:{
+        apikey:SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type":"application/json",
+        ...(opts.headers||{})
+      }
+    }
+  );
+
+  const text=await response.text();
+
+  let data=null;
+
+  try{
+    data=text?JSON.parse(text):null;
+  }catch{
+    data=text;
+  }
+
+  if(!response.ok){
+    throw new Error(
+      typeof data==="string"
+        ? data
+        : JSON.stringify(data)
+    );
+  }
+
+  return data;
+}
+
+async function rpc(fn,body={}){
+  const response=await fetch(
+    SUPABASE_URL+"/rest/v1/rpc/"+fn,
+    {
+      method:"POST",
+      headers:{
+        apikey:SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(body)
+    }
+  );
+
+  const text=await response.text();
+
+  let data=null;
+
+  try{
+    data=text?JSON.parse(text):null;
+  }catch{
+    data=text;
+  }
+
+  if(!response.ok){
+    throw new Error(
+      typeof data==="string"
+        ? data
+        : JSON.stringify(data)
+    );
+  }
+
+  return data;
+}
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+function openAuth(){
+  document.getElementById("authModal").classList.add("open");
+}
+
+function closeAuth(){
+  document.getElementById("authModal").classList.remove("open");
+}
+
+function switchAuth(mode){
+  authMode=mode;
+
+  document.getElementById("loginTab").classList.toggle(
+    "active",
+    mode==="login"
+  );
+
+  document.getElementById("registerTab").classList.toggle(
+    "active",
+    mode==="register"
+  );
+
+  document.getElementById("registerNickname").style.display=
+    mode==="register" ? "flex" : "none";
+
+  document.getElementById("authSubmit").textContent=
+    mode==="register" ? "Создать аккаунт" : "Войти";
+}
+
+async function submitAuth(event){
+  event.preventDefault();
+
+  const username=document
+    .getElementById("authUsername")
+    .value
+    .trim();
+
+  const password=document
+    .getElementById("authPassword")
+    .value;
+
+  try{
+
+    if(authMode==="register"){
+
+      const nickname=document
+        .getElementById("authNickname")
+        .value
+        .trim();
+
+      const result=await rpc(
+        "neonew_register",
+        {
+          p_username:username,
+          p_password:password,
+          p_nickname:nickname
+        }
+      );
+
+      currentUser=result;
+
+      localStorage.setItem(
+        "neonew_session",
+        result.session_token
+      );
+
+      toast("Аккаунт создан!");
+
+    }else{
+
+      const result=await rpc(
+        "neonew_login",
+        {
+          p_username:username,
+          p_password:password
+        }
+      );
+
+      currentUser=result;
+
+      localStorage.setItem(
+        "neonew_session",
+        result.session_token
+      );
+
+      toast("Вы вошли в аккаунт!");
+
+    }
+
+    closeAuth();
+
+    document.getElementById("authForm").reset();
+
+    updateButtons();
+    showProfile();
+    loadStaff();
+    loadEvents();
+
+  }catch(error){
+    toast("Ошибка: "+error.message,true);
+  }
+}
+
+async function restoreSession(){
+
+  const token=localStorage.getItem("neonew_session");
+
+  if(!token){
+    updateButtons();
+    return;
+  }
+
+  try{
+
+    const result=await rpc(
+      "neonew_get_me",
+      {
+        p_session_token:token
+      }
+    );
+
+    currentUser=result;
+
+    updateButtons();
+    showProfile();
+    loadStaff();
+    loadEvents();
+
+  }catch(error){
+
+    localStorage.removeItem("neonew_session");
+
+    currentUser=null;
+
+    updateButtons();
+  }
+}
+
+async function logout(){
+
+  const token=localStorage.getItem("neonew_session");
+
+  try{
+
+    if(token){
+      await rpc(
+        "neonew_logout",
+        {
+          p_session_token:token
+        }
+      );
+    }
+
+  }catch{}
+
+  localStorage.removeItem("neonew_session");
+
+  currentUser=null;
+
+  document
+    .getElementById("profile")
+    .classList.add("hidden");
+
+  document
+    .getElementById("admin")
+    .classList.remove("visible");
+
+  updateButtons();
+
+  toast("Вы вышли из аккаунта.");
+
+  window.location.hash="#home";
+}
+
+/* =========================================================
+   UI STATE
+========================================================= */
+
+function updateButtons(){
+
+  const authNav=document.getElementById("authNav");
+  const profileNav=document.getElementById("profileNav");
+
+  if(currentUser){
+
+    authNav.textContent="Выйти";
+
+    authNav.onclick=logout;
+
+    profileNav.classList.remove("hidden");
+
+  }else{
+
+    authNav.textContent="Войти";
+
+    authNav.onclick=openAuth;
+
+    profileNav.classList.add("hidden");
+
+  }
+}
+
+function showProfile(){
+
+  if(!currentUser)return;
+
+  const profile=document.getElementById("profile");
+
+  profile.classList.remove("hidden");
+
+  document.getElementById("pUsername").value=
+    currentUser.username||"";
+
+  document.getElementById("pNickname").value=
+    currentUser.nickname||"";
+
+  document.getElementById("pAvatar").value=
+    currentUser.avatar_url||"";
+
+  document.getElementById("pGame").value=
+    currentUser.game||"";
+
+  document.getElementById("pDiscord").value=
+    currentUser.discord_username||"";
+
+  document.getElementById("pTelegram").value=
+    currentUser.telegram_username||"";
+
+  document.getElementById("pBio").value=
+    currentUser.bio||"";
+
+  document.getElementById("profileName").textContent=
+    currentUser.nickname||currentUser.username;
+
+  const role=document.getElementById("profileRole");
+
+  role.innerHTML=currentUser.role==="admin"
+    ? '<span class="role admin">Администратор</span>'
+    : '<span class="role">Участник</span>';
+
+  const frame=document.getElementById("profileAvatarFrame");
+
+  const avatar=currentUser.avatar_url||
+    "https://cdn.discordapp.com/embed/avatars/0.png";
+
+  if(currentUser.role==="admin"){
+
+    frame.innerHTML=
+      '<div class="admin-frame">'+
+        '<img class="avatar" src="'+
+        escapeHtml(avatar)+
+        '" onerror="this.src=\'https://cdn.discordapp.com/embed/avatars/0.png\'">'+
+      '</div>';
+
+  }else{
+
+    frame.innerHTML=
+      '<img class="avatar" src="'+
+      escapeHtml(avatar)+
+      '" onerror="this.src=\'https://cdn.discordapp.com/embed/avatars/0.png\'">';
+
+  }
+
+  const admin=document.getElementById("admin");
+
+  if(currentUser.role==="admin"){
+
+    admin.classList.add("visible");
+
+    loadAdminEvents();
+
+  }else{
+
+    admin.classList.remove("visible");
+
+  }
+}
+
+async function saveProfile(event){
+
+  event.preventDefault();
+
+  if(!currentUser)return;
+
+  try{
+
+    const result=await rpc(
+      "neonew_update_profile",
+      {
+        p_session_token:localStorage.getItem("neonew_session"),
+        p_nickname:document.getElementById("pNickname").value.trim(),
+        p_avatar_url:document.getElementById("pAvatar").value.trim()||null,
+        p_game:document.getElementById("pGame").value.trim()||null,
+        p_bio:document.getElementById("pBio").value.trim()||null,
+        p_discord_username:document.getElementById("pDiscord").value.trim()||null,
+        p_telegram_username:document.getElementById("pTelegram").value.trim()||null
+      }
+    );
+
+    currentUser={
+      ...currentUser,
+      ...result
+    };
+
+    showProfile();
+    loadStaff();
+
+    toast("Профиль сохранён.");
+
+  }catch(error){
+
+    toast("Ошибка: "+error.message,true);
+
+  }
+}
+
+/* =========================================================
+   STAFF
+========================================================= */
+
+async function loadStaff(){
+
+  const container=document.getElementById("staffList");
+
+  try{
+
+    const users=await api(
+      "profiles?select=username,nickname,avatar_url,game,bio,role,is_public,created_at&is_public=eq.true&order=created_at.asc"
+    );
+
+    if(!users.length){
+
+      container.innerHTML=
+        '<div class="empty">Пока нет участников.</div>';
+
+      return;
+    }
+
+    container.innerHTML=users.map(user=>{
+
+      const avatar=user.avatar_url||
+        "https://cdn.discordapp.com/embed/avatars/0.png";
+
+      const frame=user.role==="admin"
+        ? '<div class="admin-frame"><img class="avatar" src="'+escapeHtml(avatar)+'" onerror="this.src=\'https://cdn.discordapp.com/embed/avatars/0.png\'"></div>'
+        : '<img class="avatar" src="'+escapeHtml(avatar)+'" onerror="this.src=\'https://cdn.discordapp.com/embed/avatars/0.png\'">';
+
+      return `
+        <div class="card staff">
+          ${frame}
+          <h3>${escapeHtml(user.nickname||user.username)}</h3>
+
+          <div>
+            ${
+              user.role==="admin"
+                ? '<span class="role admin">Администратор</span>'
+                : '<span class="role">Участник</span>'
+            }
+          </div>
+
+          ${
+            user.game
+              ? `<p style="margin-bottom:0">🎮 ${escapeHtml(user.game)}</p>`
+              : ""
+          }
+        </div>
+      `;
+
+    }).join("");
+
+  }catch(error){
+
+    container.innerHTML=
+      '<div class="empty">Не удалось загрузить персонал.</div>';
+
+  }
+}
+
+/* =========================================================
+   EVENTS — PUBLIC
+========================================================= */
+
+async function loadEvents(){
+
+  const container=document.getElementById("eventsList");
+
+  try{
+
+    const events=await api(
+      "events?select=id,title,prize,description,ends_at,discord_message_url,is_active,created_at&is_active=eq.true&ends_at=gt."+encodeURIComponent(new Date().toISOString())+"&order=ends_at.asc"
+    );
+
+    if(!events.length){
+
+      container.innerHTML=
+        '<div class="empty">Сейчас активных ивентов нет.</div>';
+
+      return;
+    }
+
+    container.innerHTML=events.map(event=>{
+
+      return `
+        <div class="card event">
+
+          <h3>${escapeHtml(event.title)}</h3>
+
+          <div class="prize">
+            🎁 ${escapeHtml(event.prize)}
+          </div>
+
+          ${
+            event.description
+              ? `<p>${escapeHtml(event.description)}</p>`
+              : ""
+          }
+
+          <div style="color:var(--muted);font-size:13px">
+            Завершение: ${escapeHtml(formatDate(event.ends_at))}
+          </div>
+
+          <div
+            class="countdown"
+            data-countdown="${escapeHtml(event.ends_at)}"
+          ></div>
+
+          <a
+            class="btn primary"
+            href="${escapeHtml(event.discord_message_url)}"
+            target="_blank"
+            rel="noopener"
+          >
+            🎉 Открыть розыгрыш в Discord
+          </a>
+
+        </div>
+      `;
+
+    }).join("");
+
+    startCountdowns();
+
+  }catch(error){
+
+    container.innerHTML=
+      '<div class="empty">Ошибка загрузки ивентов.</div>';
+
+    toast("Ошибка загрузки ивентов: "+error.message,true);
+  }
+}
+
+function startCountdowns(){
+
+  clearInterval(countdownTimer);
+
+  function update(){
+
+    document.querySelectorAll("[data-countdown]").forEach(el=>{
+
+      const end=new Date(el.dataset.countdown).getTime();
+
+      let diff=end-Date.now();
+
+      if(diff<=0){
+
+        el.innerHTML=
+          '<div class="status offline">Ивент завершён</div>';
+
+        return;
+      }
+
+      const days=Math.floor(diff/86400000);
+
+      diff%=86400000;
+
+      const hours=Math.floor(diff/3600000);
+
+      diff%=3600000;
+
+      const minutes=Math.floor(diff/60000);
+
+      diff%=60000;
+
+      const seconds=Math.floor(diff/1000);
+
+      el.innerHTML=`
+        <div class="time">
+          <strong>${days}</strong>
+          <small>дней</small>
+        </div>
+
+        <div class="time">
+          <strong>${hours}</strong>
+          <small>часов</small>
+        </div>
+
+        <div class="time">
+          <strong>${minutes}</strong>
+          <small>минут</small>
+        </div>
+
+        <div class="time">
+          <strong>${seconds}</strong>
+          <small>секунд</small>
+        </div>
+      `;
+
+    });
+
+  }
+
+  update();
+
+  countdownTimer=setInterval(update,1000);
+}
+
+/* =========================================================
+   EVENTS — ADMIN
+========================================================= */
+
+async function createEvent(event){
+
+  event.preventDefault();
+
+  if(!currentUser||currentUser.role!=="admin"){
+    toast("Нет доступа.",true);
+    return;
+  }
+
+  try{
+
+    await rpc(
+      "neonew_create_event",
+      {
+        p_session_token:localStorage.getItem("neonew_session"),
+
+        p_title:document.getElementById("eTitle").value.trim(),
+
+        p_prize:document.getElementById("ePrize").value.trim(),
+
+        p_description:
+          document.getElementById("eDescription").value.trim()||null,
+
+        p_ends_at:
+          new Date(
+            document.getElementById("eEnds").value
+          ).toISOString(),
+
+        p_discord_message_url:
+          document.getElementById("eDiscord").value.trim()
+      }
+    );
+
+    document.getElementById("eventForm").reset();
+
+    toast("Ивент создан!");
+
+    loadEvents();
+    loadAdminEvents();
+
+  }catch(error){
+
+    toast("Ошибка: "+error.message,true);
+
+  }
+}
+
+async function loadAdminEvents(){
+
+  const container=document.getElementById("adminEvents");
+
+  if(!currentUser||currentUser.role!=="admin"){
+
+    container.innerHTML=
+      '<div class="empty">Нет доступа.</div>';
+
+    return;
+  }
+
+  try{
+
+    const events=await rpc(
+      "neonew_admin_list_events",
+      {
+        p_session_token:localStorage.getItem("neonew_session")
+      }
+    );
+
+    if(!events.length){
+
+      container.innerHTML=
+        '<div class="empty">Ивентов пока нет.</div>';
+
+      return;
+    }
+
+    container.innerHTML=events.map(event=>{
+
+      const status=event.is_active &&
+        new Date(event.ends_at)>new Date()
+          ? "Активен"
+          : "Завершён";
+
+      return `
+        <div class="admin-event">
+
+          <div class="admin-event-info">
+            <strong>${escapeHtml(event.title)}</strong>
+
+            <span>
+              🎁 ${escapeHtml(event.prize)}
+              · ${escapeHtml(status)}
+              · ${escapeHtml(formatDate(event.ends_at))}
+            </span>
+          </div>
+
+          <div class="admin-actions">
+
+            <button
+              class="btn"
+              onclick="editEvent(${event.id})"
+            >
+              ✏️ Редактировать
+            </button>
+
+            ${
+              event.is_active
+                ? `
+                  <button
+                    class="btn success"
+                    onclick="finishEvent(${event.id})"
+                  >
+                    ✓ Завершить
+                  </button>
+                `
+                : ""
+            }
+
+            <button
+              class="btn danger"
+              onclick="deleteEvent(${event.id})"
+            >
+              🗑 Удалить
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+
+  }catch(error){
+
+    container.innerHTML=
+      '<div class="empty">Ошибка загрузки админ-панели.</div>';
+
+    toast("Ошибка: "+error.message,true);
+  }
+}
+
+async function editEvent(id){
+
+  if(!currentUser||currentUser.role!=="admin"){
+    toast("Нет доступа.",true);
+    return;
+  }
+
+  try{
+
+    const list=await rpc(
+      "neonew_admin_list_events",
+      {
+        p_session_token:localStorage.getItem("neonew_session")
+      }
+    );
+
+    const event=list.find(x=>Number(x.id)===Number(id));
+
+    if(!event){
+      toast("Ивент не найден.",true);
+      return;
+    }
+
+    const title=prompt(
+      "Название:",
+      event.title
+    );
+
+    if(title===null)return;
+
+    const prize=prompt(
+      "Приз:",
+      event.prize
+    );
+
+    if(prize===null)return;
+
+    const ends=prompt(
+      "Дата окончания (например 2026-12-31T20:00):",
+      toLocalDateTimeValue(event.ends_at)
+    );
+
+    if(ends===null)return;
+
+    const discord=prompt(
+      "Discord message URL:",
+      event.discord_message_url
+    );
+
+    if(discord===null)return;
+
+    const description=prompt(
+      "Описание:",
+      event.description||""
+    );
+
+    if(description===null)return;
+
+    await rpc(
+      "neonew_update_event",
+      {
+        p_session_token:localStorage.getItem("neonew_session"),
+
+        p_event_id:Number(id),
+
+        p_title:title.trim(),
+
+        p_prize:prize.trim(),
+
+        p_description:description.trim()||null,
+
+        p_ends_at:new Date(ends).toISOString(),
+
+        p_discord_message_url:discord.trim()
+      }
+    );
+
+    toast("Ивент обновлён!");
+
+    loadEvents();
+    loadAdminEvents();
+
+  }catch(error){
+
+    toast("Ошибка редактирования: "+error.message,true);
+
+  }
+}
+
+async function finishEvent(id){
+
+  if(!confirm("Завершить этот ивент?"))return;
+
+  try{
+
+    await rpc(
+      "neonew_finish_event",
+      {
+        p_session_token:localStorage.getItem("neonew_session"),
+        p_event_id:Number(id)
+      }
+    );
+
+    toast("Ивент завершён.");
+
+    loadEvents();
+    loadAdminEvents();
+
+  }catch(error){
+
+    toast("Ошибка: "+error.message,true);
+
+  }
+}
+
+async function deleteEvent(id){
+
+  if(!confirm("Удалить ивент навсегда?"))return;
+
+  try{
+
+    await rpc(
+      "neonew_delete_event",
+      {
+        p_session_token:localStorage.getItem("neonew_session"),
+        p_event_id:Number(id)
+      }
+    );
+
+    toast("Ивент удалён.");
+
+    loadEvents();
+    loadAdminEvents();
+
+  }catch(error){
+
+    toast("Ошибка удаления: "+error.message,true);
+
+  }
+}
+
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+function particles(){
+
+  const container=document.getElementById("particles");
+
+  for(let i=0;i<70;i++){
+
+    const d=document.createElement("div");
+
+    d.className="particle";
+
+    d.style.left=Math.random()*100+"%";
+
+    d.style.animationDuration=(5+Math.random()*8)+"s";
+
+    d.style.animationDelay=(-Math.random()*8)+"s";
+
+    d.style.opacity=.2+Math.random()*.8;
+
+    container.appendChild(d);
+  }
+}
+
+/* =========================================================
+   INIT
+========================================================= */
+
+document.getElementById("year").textContent=
+  new Date().getFullYear();
+
+particles();
+
+updateButtons();
+
+loadStaff();
+
+loadEvents();
+
+restoreSession();
+</script>
+
+</body>
+</html>
